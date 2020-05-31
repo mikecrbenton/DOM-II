@@ -9,7 +9,7 @@
   <link href="https://fonts.googleapis.com/css?family=Indie+Flower|Roboto" rel="stylesheet">
   <link href="css/index.css" rel="stylesheet">
 
-  <script src="js/index.js" async></script>
+  <script defer src="js/index.js"></script>
 
   <!--[if lt IE 9]>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
@@ -22,10 +22,13 @@
     <div class="container nav-container">
       <h1 class="logo-heading">Fun Bus</h1>
       <nav class="nav">
-        <a class="nav-link" href="#">Home</a>
-        <a class="nav-link" href="#">About Us</a>
-        <a class="nav-link" href="#">Blog</a>
-        <a class="nav-link" href="#">Contact</a>
+        <div class="empty" draggable="true"> 
+   
+        </div>
+        <a class="nav-link" draggable="true" href="#">Home</a>
+        <a class="nav-link" draggable="true" href="#">About Us</a>
+        <a class="nav-link" draggable="true" href="#">Blog</a>
+        <a class="nav-link" draggable="true" href="#">Contact</a>
       </nav>
     </div>
   </header>
@@ -80,7 +83,11 @@
         <div class="btn">Sign Me Up!</div>
       </div>
     </section>
+
+    <input class="added-this-because-there-isnt-alot-to-work-with" type="text">
+
   </div><!-- container -->
+
 
   <footer class="footer">
     <p>Copyright Fun Bus 2018</p>

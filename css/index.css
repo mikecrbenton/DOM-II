@@ -350,3 +350,11 @@ img {
   background: #FFFFFF;
   color: #17A2B8;
 }
+
+
+/* ADDED FOR ASSIGNMENT */
+
+.empty{
+   border: 1px dotted gray;
+   padding: 0 30px ;
+}

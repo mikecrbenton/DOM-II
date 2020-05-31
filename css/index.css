@@ -204,6 +204,10 @@ img {
   display: flex;
   justify-content: space-evenly;
 }
+.main-navigation .nav-container .nav .empty {
+  border: 1px dotted gray;
+  padding: 0 40px ;
+}
 @media (max-width: 500px) {
   .main-navigation .nav-container .nav {
     width: 100%;
@@ -349,12 +353,4 @@ img {
 .home .content-pick .destination .btn:hover {
   background: #FFFFFF;
   color: #17A2B8;
-}
-
-
-/* ADDED FOR ASSIGNMENT */
-
-.empty{
-   border: 1px dotted gray;
-   padding: 0 30px ;
 }

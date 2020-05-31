@@ -142,10 +142,10 @@ picToChange.addEventListener('dblclick', ()=>{
 
 // 8) FOCUS===================================================
 
-let selectedInput = document.getElementsByClassName("added-this-because-there-isnt-alot-to-work-with");
+let selectedInput = document.getElementsByClassName("added-this");
 console.log(selectedInput);
 
 selectedInput[0].addEventListener('focus', ()=>{
-   alert("selected");
+   selectedInput[0].value = "something here";
 });
 

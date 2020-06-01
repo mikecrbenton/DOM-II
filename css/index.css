@@ -354,3 +354,9 @@ img {
   background: #FFFFFF;
   color: #17A2B8;
 }
+.home .added .center {
+  text-align: center;
+}
+.home .added .center p {
+  margin-top: 0.5em;
+}

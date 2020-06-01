@@ -5,8 +5,8 @@
    even be run without making alterations to the html */
 
 
-// 1) MOUSEOVER======================================
-//WORKING - ADD MOUSEOUT
+// 1 & 2) MOUSEOVER & MOUSELEAVE===========================
+//WORKING
 let mainHeader = document.getElementsByClassName('logo-heading');
 
 console.log(mainHeader);
@@ -14,27 +14,35 @@ console.log(mainHeader);
 function boldTheHeader(){
    mainHeader[0].style.fontWeight = 'bold';
 }
+function regTheHeader(){
+   mainHeader[0].style.fontWeight = 'normal';
+}
 
 mainHeader[0].addEventListener('mouseover', boldTheHeader );
+mainHeader[0].addEventListener('mouseleave', regTheHeader );
 
 
+// 3) KEYDOWN========================================
+//WORKING
 
-// 2) KEYDOWN========================================
-//NOT WORKING
-//let changeAllText = document.getElementsByTagName("body");
+// ADDED TO THE WINDOW OBJECT
+window.addEventListener("keydown", changeColor);
 
-// function changeColor(){
+// let resizedTimes = 0;
+// function keepCount() {
+//   resizedTimes += 1;
+//   document.getElementById("count").innerHTML = resizedTimes;
 
-//     let colorArray = ['blue','red','green','orange','purple','yellow','gray','pink'];
+function changeColor(){
 
-//     mainHeader.style.color = colorArray[Math.floor(Math.random() * newColorArray.length)];
-// }
+    let colorArray = ['blue','red','green','orange','purple','yellow','gray','pink'];
 
-// mainHeader.addEventListener('keydown',changeColor);
+    let elementToChangeColor = document.getElementsByTagName("body");
+    elementToChangeColor[0].style.backgroundColor = colorArray[Math.floor(Math.random() * colorArray.length)];
+}
 
 
-
-// 3) WHEEL============================================
+// 4) WHEEL============================================
 // WORKING--
 // CHANGE TO THIS:  https://developer.mozilla.org/en-US/docs/Web/API/Element/wheel_event
 
@@ -50,7 +58,7 @@ h2_Header.addEventListener('wheel', h2Temp );
 
 
 
-// 4) DRAG-DROP===============================================
+// 5) DRAG-DROP===============================================
 // WORKING - NEED TO FIX
 // https://www.youtube.com/watch?v=C22hQKE_32c
 
@@ -92,7 +100,7 @@ document.getElementsByClassName
 
 
 
-// 5) CLICK=================================================
+// 6) CLICK=================================================
 //WORKING - NEED TO MAKE APPEAR AGAIN
 function hideText(){
    document.querySelector(".intro p").style.display = 'none';
@@ -102,7 +110,7 @@ document.querySelector(".intro p").addEventListener('click', hideText);
 
 
 
-// 6) COPY==================================================
+// 7) COPY==================================================
 //WORKING
 
 //CREATE AN HTML ELEMENT
@@ -130,7 +138,7 @@ function copyAppendText(){
 
 
 
-// 7) DOUBLE-CLICK=============================================
+// 8) DOUBLE-CLICK=============================================
 //WORKING
 
 let picToChange = document.querySelector(".img-content img");
@@ -140,12 +148,23 @@ picToChange.addEventListener('dblclick', ()=>{
    picToChange.src = "img/fun.jpg";
 })
 
-// 8) FOCUS===================================================
-
-let selectedInput = document.getElementsByClassName("added-this");
+// 9) FOCUS===================================================
+//WORKING
+let selectedInput = document.getElementsByClassName("input-text");
 console.log(selectedInput);
 
 selectedInput[0].addEventListener('focus', ()=>{
    selectedInput[0].value = "something here";
 });
 
+// 10) RESIZE====================================================
+//WORKING
+
+// ADDED TO THE WINDOW OBJECT
+window.addEventListener("resize", keepCount);
+
+let resizedTimes = 0;
+function keepCount() {
+  resizedTimes += 1;
+  document.getElementById("count").innerHTML = resizedTimes;
+}

@@ -46,15 +46,16 @@ function changeColor(){
 // WORKING--
 // CHANGE TO THIS:  https://developer.mozilla.org/en-US/docs/Web/API/Element/wheel_event
 
-let h2_Header = document.querySelector('.text-content h2');
+let h2_Header = document.getElementsByClassName('main-navigation');
 
 console.log(h2_Header);
 
 function h2Temp(){
-   h2_Header.style.color = 'red';
+
+   h2_Header[0].style.backgroundColor = 'red';
 }
 
-h2_Header.addEventListener('wheel', h2Temp );
+h2_Header[0].addEventListener('wheel', h2Temp );
 
 
 
@@ -122,19 +123,12 @@ newElement.appendChild(newText);
 
 
 let textToCopy = document.querySelector(".text-content h2");
+textToCopy.addEventListener('copy', copy_h2_Header);
 
-textToCopy.addEventListener('copy', copyAppendText);
-
-function copyAppendText(){
+function copy_h2_Header(){
    let parent = document.querySelector('.text-content');
    parent.insertBefore( newElement, textToCopy );
 }
-
-// PUT SOMEWHERE IN THE DOM
-// let domElement = document.querySelector(‘htmlTag .class’);
-// let insertBeforeThis = document.querySelectory(‘htmlTag htmlTag’);
-
-// domElement.insertBefore( newElement, insertBeforeThis );
 
 
 

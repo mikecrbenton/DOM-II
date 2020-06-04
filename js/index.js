@@ -60,45 +60,62 @@ h2_Header[0].addEventListener('wheel', h2Temp );
 
 
 // 5) DRAG-DROP===============================================
-// WORKING - NEED TO FIX
-// https://www.youtube.com/watch?v=C22hQKE_32c
 
-let links = document.querySelectorAll('.nav-link'); // node-list
-let emptySpace = document.getElementsByClassName('empty'); // do you need the inner tag??
+const link_items = document.querySelectorAll('.link-item');
+const linkDivContainers = document.querySelectorAll('.linkContainer');
 
-//ADD LISTENER TO LINKS
-// for( let i = 0 ; i<links.length ; i++ ){
-//    links[i].addEventListener('dragstart', dragStart);
-//    links[i].addEventListener('dragend', dragEnd);
-// }
+// WHY NULL?  nothing to assign yet, but need to declare
+// outside the scope of the loop
+let draggedItem = null;
 
-emptySpace[0].addEventListener('dragover', dragOver );
-emptySpace[0].addEventListener('dragenter', dragEnter );
-//emptySpace[0].addEventListener('dragleave', dragLeave );
-emptySpace[0].addEventListener('drop', dragDrop );
+// OUTER FOR() LOOP
+for (let i = 0; i < link_items.length; i++) {
+  
+	const individualLink = link_items[i];
 
-//DRAG FUNCTIONS
-// function dragStart(){
-//    console.log('start');
-// }
-// function dragEnd(){
-//    console.log('end');
-// }
-function dragOver(e){
-   e.preventDefault();
+	individualLink.addEventListener('dragstart', function () {
+    
+    //WHY DOES THIS WORK DYNAMICALLY?
+		draggedItem = individualLink;
+    
+    //DISAPPEAR WHEN YOU GRAB IT
+		setTimeout(function () {
+			individualLink.style.display = 'none';
+		}, 0);
+	});
+
+	individualLink.addEventListener('dragend', function () {
+    
+    //SET TO REAPPEAR IN NEW LOCATION
+		setTimeout(function () {
+			draggedItem.style.display = 'inline-block';
+			//DON'T UNDERSTAND WHY THIS
+         //draggedItem = null;
+		}, 0);
+	})
+
+	for (let j = 0; j < linkDivContainers.length; j ++) {
+		const linkDiv = linkDivContainers[j];
+      
+		linkDiv.addEventListener('dragover', function (e) {
+      //ALLOW TO STICK IN NEW LOCATION
+			e.preventDefault();
+		});
+		
+		linkDiv.addEventListener('dragenter', function (e) {
+      //NOT SURE WHY NEEDED
+			e.preventDefault();
+		});
+
+		linkDiv.addEventListener('dragleave', function (e) {
+      //NEED THIS AT ALL?
+		});
+
+		linkDiv.addEventListener('drop', function (e) {
+			this.append(draggedItem);
+		});
+	}
 }
-function dragEnter(e){
-   e.preventDefault();
-}
-// function dragLeave(){
-   
-// }
-function dragDrop(){
-   emptySpace[0].append(links[0]); //REIGHT NOW IT ONLY APPENDS THE 1ST ONE - NOT DYNAMIC
-}
-
-document.getElementsByClassName
-
 
 
 // 6) CLICK=================================================

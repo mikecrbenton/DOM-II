@@ -1,12 +1,9 @@
 // Your code goes here
 
-/* Not real impressed with this assignment.  I feel like a previous assignment
-   was just rehashed.  Instructions are also poor - some of those events can't 
-   even be run without making alterations to the html */
-
-
 // 1 & 2) MOUSEOVER & MOUSELEAVE===========================
-//WORKING
+//HOVER OVER MAIN HEADER
+
+
 let mainHeader = document.getElementsByClassName('logo-heading');
 
 console.log(mainHeader);
@@ -22,8 +19,10 @@ mainHeader[0].addEventListener('mouseover', boldTheHeader );
 mainHeader[0].addEventListener('mouseleave', regTheHeader );
 
 
+
 // 3) KEYDOWN========================================
-//WORKING
+//KEYPRESS WILL CHANGE BACKGROUND COLOR
+
 
 // ADDED TO THE WINDOW OBJECT
 window.addEventListener("keydown", changeColor);
@@ -42,24 +41,26 @@ function changeColor(){
 }
 
 
+
 // 4) WHEEL============================================
-// WORKING--
-// CHANGE TO THIS:  https://developer.mozilla.org/en-US/docs/Web/API/Element/wheel_event
+//SCROLLING CHANGES THE HEADER TO RED
 
-let h2_Header = document.getElementsByClassName('main-navigation');
 
-console.log(h2_Header);
+let mainNav = document.getElementsByClassName('main-navigation');
+
+console.log(mainNav);
 
 function h2Temp(){
-
-   h2_Header[0].style.backgroundColor = 'red';
+   mainNav[0].style.backgroundColor = 'red';
 }
 
-h2_Header[0].addEventListener('wheel', h2Temp );
+window.addEventListener('wheel', h2Temp );
 
 
 
 // 5) DRAG-DROP===============================================
+//NAVIGATION LINKS
+
 
 const link_items = document.querySelectorAll('.link-item');
 const linkDivContainers = document.querySelectorAll('.linkContainer');
@@ -68,14 +69,13 @@ const linkDivContainers = document.querySelectorAll('.linkContainer');
 // outside the scope of the loop
 let draggedItem = null;
 
-// OUTER FOR() LOOP
+//LOOP FOR LINKS
 for (let i = 0; i < link_items.length; i++) {
   
 	const individualLink = link_items[i];
 
 	individualLink.addEventListener('dragstart', function () {
     
-    //WHY DOES THIS WORK DYNAMICALLY?
 		draggedItem = individualLink;
     
     //DISAPPEAR WHEN YOU GRAB IT
@@ -94,50 +94,53 @@ for (let i = 0; i < link_items.length; i++) {
 		}, 0);
 	})
 
-	for (let j = 0; j < linkDivContainers.length; j ++) {
-		const linkDiv = linkDivContainers[j];
-      
-		linkDiv.addEventListener('dragover', function (e) {
-      //ALLOW TO STICK IN NEW LOCATION
-			e.preventDefault();
-		});
-		
-		linkDiv.addEventListener('dragenter', function (e) {
-      //NOT SURE WHY NEEDED
-			e.preventDefault();
-		});
-
-		linkDiv.addEventListener('dragleave', function (e) {
-      //NEED THIS AT ALL?
-		});
-
-		linkDiv.addEventListener('drop', function (e) {
-			this.append(draggedItem);
-		});
-	}
 }
+
+//LOOP FOR CONTAINERS
+for (let j = 0; j < linkDivContainers.length; j ++) {
+   const linkDiv = linkDivContainers[j];
+   
+   linkDiv.addEventListener('dragover', function (e) {
+   //ALLOW TO STICK IN NEW LOCATION
+      e.preventDefault();
+   });
+   
+   linkDiv.addEventListener('dragenter', function (e) {
+   //NOT SURE IF NEEDED
+      e.preventDefault();
+   });
+
+   linkDiv.addEventListener('drop', function (e) {
+      linkDiv.append(draggedItem);
+   });
+}
+
 
 
 // 6) CLICK=================================================
-//WORKING - NEED TO MAKE APPEAR AGAIN
+//FOOTER DISAPPEARS WHEN CLICKED
+
+
 function hideText(){
-   document.querySelector(".intro p").style.display = 'none';
+   document.querySelector(".footer").style.display = 'none';
 }
 
-document.querySelector(".intro p").addEventListener('click', hideText);
+document.querySelector(".footer").addEventListener('click', hideText);
 
 
 
 // 7) COPY==================================================
-//WORKING
+// COPY "LET'S GO" HEADER
+
 
 //CREATE AN HTML ELEMENT
 let newElement = document.createElement("div");	
 //CREATE SOME CONTENT
 let newText = document.createTextNode("COPIED");
-//ADD THAT CONTENT TO THE ELEMENT
+//ADD THAT CONTENT TO THE ELEMENT AND STYLE
 newElement.appendChild(newText);
-
+newElement.style.fontSize = "4rem";
+newElement.style.backgroundColor = "yellow";
 
 let textToCopy = document.querySelector(".text-content h2");
 textToCopy.addEventListener('copy', copy_h2_Header);
@@ -150,17 +153,20 @@ function copy_h2_Header(){
 
 
 // 8) DOUBLE-CLICK=============================================
-//WORKING
+
 
 let picToChange = document.querySelector(".img-content img");
-//console.log(picToChange);
 
-picToChange.addEventListener('dblclick', ()=>{
+picToChange.addEventListener('dblclick', (e)=>{
+   e.stopPropagation();
    picToChange.src = "img/fun.jpg";
+   container.style.borderStyle = "none";
 })
 
+
+
 // 9) FOCUS===================================================
-//WORKING
+
 let selectedInput = document.getElementsByClassName("input-text");
 console.log(selectedInput);
 
@@ -168,8 +174,11 @@ selectedInput[0].addEventListener('focus', ()=>{
    selectedInput[0].value = "something here";
 });
 
+
+
 // 10) RESIZE====================================================
-//WORKING
+//WHEN YOU CTRL+ -  
+
 
 // ADDED TO THE WINDOW OBJECT
 window.addEventListener("resize", keepCount);
@@ -179,3 +188,43 @@ function keepCount() {
   resizedTimes += 1;
   document.getElementById("count").innerHTML = resizedTimes;
 }
+
+
+
+// 11) EVENT PROPAGATION==========================================
+//ALSO IN USE ON NUMBER 8) TO PREVENT BLACK BORDER WHEN CLICKED
+
+
+let container = document.querySelector(".container.home");
+let introHeader = document.querySelector('.intro');
+let h2Header = document.querySelector('.intro h2')
+
+// Without e.stopPropagation(), all the borders
+// will remain, instead of being hidden
+
+
+//CLICK IN THE MIDDLE OF THE PAGE
+container.addEventListener('dblclick', (e) => {
+   e.stopPropagation();
+   container.style.border = "8px solid black";
+})
+
+//CLICK ON THE FIRST PARAGRAPH
+introHeader.addEventListener('dblclick', (e) => {
+   e.stopPropagation();
+   introHeader.style.border = "8px solid blue";
+   container.style.borderStyle = "none";
+})
+
+//CLICK ON "WELCOME TO THE FUN BUS"
+h2Header.addEventListener('dblclick', (e) => {
+   e.stopPropagation();
+   h2Header.style.border = "8px solid yellow";
+   introHeader.style.borderStyle = "none";
+})
+
+
+
+// 12) E.PREVENTDEFAULT========================================
+
+// IN USE IN DRAG & DROP
